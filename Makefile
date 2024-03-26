@@ -1,8 +1,35 @@
-build:
-	gcc -Wall -Werror -Wextra -pedantic ./src/*.c -lm -o maze `sdl2-config --cflags` `sdl2-config --libs`;
+# CC specifies the compiler to be used
+CC = gcc
 
-run:
-	./maze;
+# SRC specifies the .c files
+SRC = src/main.c src/window.c src/raycaster.c src/SDL_subfunctions.c \
+	src/colors.c src/angles.c src/color_arithmetic.c src/map.c \
+	src/color_operations.c src/draw_all_things.c src/draw_to_screen.c \
+	src/window_status.c
 
-clean:
-	rm maze;
+# OBJ specifies the .o files
+OBJ = $(SRC:.c=.o)
+
+# NAME specifies the name of our exectuable
+NAME = 'Raycaster_Maze'
+
+# SDL2 runs the sdl2-config program with the necessary flags
+SDL2 := $`sdl2-config --cflags` `sdl2-config --libs`
+
+# CFLAGS specifies your favorite compiler flags
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+# LFLAGS specifies the linker flags
+# LFLAGS =
+
+# Makefile should work even if there is a file in the folder
+# that has the same name as rule
+.PHONY: all clean oclean fclean re
+
+# This rule builds our executable
+# Makefile should not compile if the header file main.h is missing
+all: include/main.h $(OBJ)
+	$(CC) $(OBJ) $(CFLAGS) $(SDL2) -o $(NAME)
+
+# This rule forces recompilation of all source files
+re: fclean all
