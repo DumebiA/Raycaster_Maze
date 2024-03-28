@@ -1,158 +1,96 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _MAIN_H_
+#define _MAIN_H_
 
-#include <SDL2/SDL.h>
-#include <stdint.h>
-#include <math.h>
-#include <limits.h>
 #include <stdio.h>
-#include <stdbool.h>
-#include "upng.h"
+#include <SDL2/SDL.h>
+#include "physics.h"
+#include "rgb.h"
+#include "raycaster.h"
+#include "renderer.h"
 
+/* Dimensional constants */
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+#define MAP_HEIGHT 25
+#define MAP_WIDTH 25
+#define BLOCK_HEIGHT 64
+#define PLAYER_HEIGHT 32
+#define FOV 66
+#define COLOR_DEPTH 32
+#define TILE_SIZE 16
 
-/* Constants */
+#define KEYS 322
 
-#define PI 3.14159265
-#define TWO_PI 6.28318530
+/* Boolean values */
+#define false 0
+#define true 1
 
-#define TILE_SIZE 64
-
-#define MINIMAP_SCALE_FACTOR 0.25
-
-#define SCREEN_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-#define SCREEN_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
-
-#define FOV_ANGLE (60 * (PI / 180))
-
-#define NUM_RAYS SCREEN_WIDTH
-
-#define PROJ_PLANE ((SCREEN_WIDTH / 2) / tan(FOV_ANGLE / 2))
-
-#define FPS 30
-#define FRAME_TIME_LENGTH (1000 / FPS)
-
-#define MAP_NUM_ROWS 13
-#define MAP_NUM_COLS 20
-
-#define NUM_TEXTURES 8
-
-typedef uint32_t color_t;
-
-/* Process Input */
-void handleInput(void);
-extern bool GameRunning;
-
-/* Functions-variables-structs for draw */
-
-bool initializeWindow(void);
-void destroyWindow(void);
-void clearColorBuffer(color_t color);
-void render_game(void);
-void renderColorBuffer(void);
-void drawPixel(int x, int y, color_t color);
-void drawRect(int x, int y, int width, int height, color_t color);
-void drawLine(int x0, int y0, int x1, int y1, color_t color);
-
-/* Functions-variables-structs for map */
-bool DetectCollision(float x, float y);
-bool isInsideMap(float x, float y);
-void renderMap(void);
-int getMapValue(int row, int col);
-
-/* Functions-variables-structs for player */
+typedef _Bool bool;
 
 /**
- * struct player_s - struct for the textures
- * @x: x coordinate
- * @y: y coordinate
- * @width: player width
- * @height: player height
- * @turnDirection: Turn Direction
- * @walkDirection: Walk Direction
- * @rotationAngle: player rotation angle
- * @walkSpeed: walk speed
- * @turnSpeed: turn speed
- */
-
-typedef struct player_s
-{
-	float x;
-	float y;
-	float width;
-	float height;
-	int turnDirection;
-	int walkDirection;
-	float rotationAngle;
-	float walkSpeed;
-	float turnSpeed;
-} player_t;
-
-extern player_t player;
-
-void movePlayer(float DeltaTime);
-void renderPlayer(void);
-
-/* Functions-variables-structs for ray */
-
-/**
- * struct ray_s - struct for the textures
- * @rayAngle: ray angle
- * @wallHitX: wall hit x coordinate
- * @wallHitY: wall hit x coordinate
- * @distance: ditance to the wall
- * @wasHitVertical: verify hit vertical
- * @wallHitContent: wall hit content
- */
-
-typedef struct ray_s
-{
-	float rayAngle;
-	float wallHitX;
-	float wallHitY;
-	float distance;
-	bool wasHitVertical;
-	int wallHitContent;
-} ray_t;
-
-extern ray_t rays[NUM_RAYS];
-
-float distanceBetweenPoints(float x1, float y1, float x2, float y2);
-bool isRayFacingUp(float angle);
-bool isRayFacingDown(float angle);
-bool isRayFacingLeft(float angle);
-bool isRayFacingRight(float angle);
-void castAllRays(void);
-void castRay(float rayAngle, int stripId);
-void renderRays(void);
-void horzIntersection(float rayAngle);
-void vertIntersection(float rayAngle);
-
-/* Functions-variables-structs for textures */
-
-/**
- * struct texture_s - struct for the textures
- * @width: texture width
- * @height: texture height
- * @texture_buffer: pointer to texture buffer
- * @upngTexture: pointer to upng buffer
+ * struct SDL_Instance - Typedef for struct of type SDL_Instance
+ * @window: SDL Window we'll be rendering to
+ * @renderer: SDL Renderer
+ * @screenSurface: SDL Screen Surface contained by the window
+ * @image: The image we will load and show on the screen
  *
+ * Description: A struct for the SDL_Instance.
  */
-
-typedef struct texture_s
+typedef struct SDL_Instance
 {
-	int width;
-	int height;
-	color_t *texture_buffer;
-	upng_t *upngTexture;
-} texture_t;
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+	SDL_Surface *screenSurface;
+	SDL_Surface *image;
+} SDL_Instance;
 
-texture_t wallTextures[NUM_TEXTURES];
+_Bool initialize_SDL(SDL_Instance *instance);
+void keep_window(bool *quit);
+void colorFill(SDL_Instance *instance, char *color_name);
+void end(SDL_Instance *instance);
+_Bool loadMedia(SDL_Instance *instance, char *media_path);
+_Bool done(SDL_Event *event, bool delay, const unsigned char *keys);
+void readKeys(const unsigned char *keys);
+int poll_events(void);
 
-void WallTexturesready(void);
-void freeWallTextures(void);
+void draw_image(SDL_Instance *instance);
+void draw_something(SDL_Instance *instance);
 
-/* Functions-variables-structs for walls */
+/**
+ * generate_map - A function to generate the map to be rendered in the game.
+ *
+ * @worldMap: A 2-dimensional matrix of integers to render the game map
+ */
+void generate_map(int (*worldMap)[MAP_WIDTH]);
 
-void renderWall(void);
+/**
+ * drawMiniMap - A function to draw the minimap.
+ *
+ * @WorldMap: The map to draw
+ * @instance: The SDL_Instance to draw to
+ * @player: The player to draw
+ */
+void drawMiniMap(int (*WorldMap)[MAP_WIDTH], SDL_Instance *instance,
+				Vector player);
 
-#endif /*MAIN_H*/
+int raycaster(Vector object, double *time, double *oldTime,
+			SDL_Instance *instance, SDL_Event *event, bool delay,
+			const unsigned char *keys);
+int DDA(int *hit, int *side, double *sideDistX, double *sideDistY,
+		double deltaDistX, double deltaDistY, int *mapX, int *mapY, int stepX,
+		int stepY, int (*worldMap)[MAP_WIDTH]);
+int verLine(int x, int y1, int y2, ColorRGBA *color, SDL_Instance *instance);
+
+/**
+ * color_walls - Assigns a color code to each integer case
+ *
+ * @worldMap: A 2-dimensional array of integer values
+ * @mapX: x-coordinate of current box of the map we're in
+ * @mapY: y-coordinate of current box of the map we're in
+ * @color: struct of type ColorRGBA containing the RGBA value of given color
+ * @side: Side of the wall that was hit (NS or EW)
+ */
+void color_walls(int (*worldMap)[MAP_WIDTH], int mapX, int mapY,
+				ColorRGBA *color, int side);
+
+#endif /*_MAIN_H_*/

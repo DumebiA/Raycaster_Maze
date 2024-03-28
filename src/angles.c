@@ -1,4 +1,4 @@
-#include "../include/main.h"
+#include "../headers/main.h"
 
 /**
  * deg - A function to convert a given value of either Gradients

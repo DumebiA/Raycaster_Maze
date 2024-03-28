@@ -2,10 +2,10 @@
 CC = gcc
 
 # SRC specifies the .c files
-SRC = src/main.c src/window.c src/raycaster.c src/SDL_subfunctions.c \
-	src/colors.c src/angles.c src/color_arithmetic.c src/map.c \
-	src/color_operations.c src/draw_all_things.c src/draw_to_screen.c \
-	src/window_status.c
+SRC = src/main.c src/exit_window.c src/raycast.c src/generate_map.c \
+      src/render_walls.c src/angles.c src/rgb.c src/rgb_ops.c \
+      src/rgb_physics.c src/SDL.c src/SDL_window.c \
+      src/walls.c
 
 # OBJ specifies the .o files
 OBJ = $(SRC:.c=.o)

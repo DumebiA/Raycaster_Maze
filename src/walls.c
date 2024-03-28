@@ -1,4 +1,4 @@
-#include "../include/main.h"
+#include "../headers/main.h"
 
 /**
  * draw_something - A basic function to draw a line
