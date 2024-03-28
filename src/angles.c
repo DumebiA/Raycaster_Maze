@@ -4,20 +4,20 @@
  * deg - A function to convert a given value of either Gradients
  * or Radians to Degrees.
  *
- * @val: Value in Gradients or Radians
- * @format: 'g' for Gradient or 'r' for Radians
+ * @v: Value in Gradients or Radians
+ * @f: 'g' for Gradient or 'r' for Radians
  * Return: Value in Degrees else -1
  */
-double deg(float val, char format)
+double deg(float v, char f)
 {
-	if (format == 'g')
-		val *= 0.9;
-	else if (format == 'r')
-		val = val * 180 / PI;
+	if (f == 'g')
+		v *= 0.9;
+	else if (f == 'r')
+		v = v * 180 / PI;
 	else
 		return (-1);
 
-	return (val);
+	return (v);
 }
 
 /**
