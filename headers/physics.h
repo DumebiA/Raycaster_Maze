@@ -7,9 +7,9 @@
 #define PI M_PI
 
 /* CONVERSION OF ANGLES */
-double deg(float val, char format);
-double grd(float val, char format);
-double rad(float val, char format);
+double deg(float a, char b);
+double grd(float a, char b);
+double rad(float a, char b);
 float handle_mod1(float target);
 
 #endif /* _PHYSICS_H_ */

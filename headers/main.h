@@ -44,8 +44,8 @@ typedef struct SDL_Instance
 	SDL_Surface *image;
 } SDL_Instance;
 
-_Bool initialize_SDL(SDL_Instance *instance);
-void keep_window(bool *quit);
+_Bool initialize_SDL(SDL_Instance *ins);
+void keep_open(bool *c);
 void colorFill(SDL_Instance *instance, char *color_name);
 void end(SDL_Instance *instance);
 _Bool loadMedia(SDL_Instance *instance, char *media_path);
@@ -70,7 +70,7 @@ void generate_map(int (*worldMap)[MAP_WIDTH]);
  * @instance: The SDL_Instance to draw to
  * @player: The player to draw
  */
-void drawMiniMap(int (*WorldMap)[MAP_WIDTH], SDL_Instance *instance,
+void draw_MiniMap(int (*WorldMap)[MAP_WIDTH], SDL_Instance *instance,
 				Vector player);
 
 int raycaster(Vector object, double *time, double *oldTime,
@@ -90,7 +90,7 @@ int verLine(int x, int y1, int y2, ColorRGBA *color, SDL_Instance *instance);
  * @color: struct of type ColorRGBA containing the RGBA value of given color
  * @side: Side of the wall that was hit (NS or EW)
  */
-void color_walls(int (*worldMap)[MAP_WIDTH], int mapX, int mapY,
-				ColorRGBA *color, int side);
+void walls_paint(int (*worldmap)[MAP_WIDTH], int mX, int mY,
+				ColorRGBA *paint, int s);
 
 #endif /*_MAIN_H_*/
