@@ -16,6 +16,7 @@ Interests in game design and map building.
 
 These roles have been decided based on each member's skills and interests, ensuring a balanced team capable of covering both technical and creative aspects of the project.
 
+![Uploading vlcsnap-2024-04-17-09h47m03s100.png…]()
 
 3. Technologies
 Languages: C
