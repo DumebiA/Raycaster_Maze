@@ -14,7 +14,9 @@ One of the most daunting technical challenges we faced was implementing the rayc
 
 ## Instalation
 Install SDL2 - to provide low level access to audio, keyboard, mouse, joystick and graphicshardware via OpenGL and Direct3D;
+
 Compile program - gcc -Wall -Werror -Wextra -pedantic ./src/*.c -lm -o 'Raycaster_Maze' `sdl2-config --cflags` `sdl2-config --libs`; 
+
 Run - ./Raycaster_Maze
 
 ### Raycasting Algorithm
