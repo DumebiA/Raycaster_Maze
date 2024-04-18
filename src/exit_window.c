@@ -1,21 +1,21 @@
 #include "../headers/main.h"
 
 /**
- * done - A function that returns 1 if you close the window or press the escape
+ * done_esc - A function that returns 1 if you close the window or press the escape
  * key. Also handles everything that's needed per frame.
  *
- * @event: An SDL Event
- * @delay: The delay flag (true or false)
- * @keys: A boolean array to store key states
+ * @e: An SDL Event
+ * @n: The delay flag (true or false)
+ * @k: A boolean array to store key states
  * Return: Boolean success flag (true or flase)
  */
-bool done(SDL_Event *event, bool delay, const unsigned char *keys)
+bool done_esc(SDL_Event *e, bool n, const unsigned char *k)
 {
 	/* delay gives CPU some free time */
 	/* use once per frame to avoid 100% usage of a CPU core */
-	if (delay)
+	if (n)
 		SDL_Delay(5); /* so it consumes less processing power */
-	SDL_PollEvent(event);
+	SDL_PollEvent(e);
 	/**
 	 * while (SDL_PollEvent(event))
 	 * {
@@ -23,25 +23,25 @@ bool done(SDL_Event *event, bool delay, const unsigned char *keys)
 	 *		return (true);
 	 * }
 	 */
-	/* readKeys(keys); */
-	if (keys[SDLK_ESCAPE])
+	/* read_Keys(keys); */
+	if (k[SDLK_ESCAPE])
 		return (true);
 
 	return (false);
 }
 
 /**
- * readKeys - A function that gives value of pressed key to keys array.
+ * read_Keys - A function that gives value of pressed key to keys array.
  *
- * @keys: A boolean array to store key states
+ * @k: A boolean array to store key states
  */
-void readKeys(const unsigned char *keys)
+void read_Keys(const unsigned char *k)
 {
 	SDL_PumpEvents();
-	keys = SDL_GetKeyboardState(NULL);
-	for (int i = 0; i < 1; i++)
+	k = SDL_GetKeyboardState(NULL);
+	for (int n = 0; n < 1; n++)
 	{
-		if (keys[i] == 1)
+		if (k[n] == 1)
 			break;
 	}
 }

@@ -7,15 +7,15 @@
  * @color2: The 2nd struct
  * Return: The sum struct of type ColorRGBA
  */
-ColorRGBA rgba_color_add(ColorRGBA color1, ColorRGBA color2)
+ColorRGBA rgb_add(ColorRGBA c1, ColorRGBA c2)
 {
-	ColorRGBA color;
+	ColorRGBA rgb;
 
-	color.red = abs(color1.red + color2.red) % 255;
-	color.green = abs(color1.green + color2.green) % 255;
-	color.blue = abs(color1.blue + color2.blue) % 255;
-	color.alpha = handle_mod1(color1.alpha + color2.alpha);
-	return (color);
+	rgb.red = abs(c1.red + c2.red) % 255;
+	rgb.green = abs(c1.green + c2.green) % 255;
+	rgb.blue = abs(c1.blue + c2.blue) % 255;
+	rgb.alpha = handle_mod1(c1.alpha + c2.alpha);
+	return (rgb);
 }
 
 /**
@@ -61,7 +61,7 @@ ColorRGBA rgba_color_mul(ColorRGBA color1, ColorRGBA color2)
  * @color2: The 2nd struct
  * Return: The quotient struct of type ColorRGBA
  */
-ColorRGBA rgba_color_div(ColorRGBA color1, ColorRGBA color2)
+ColorRGBA rgb_div(ColorRGBA color1, ColorRGBA color2)
 {
 	ColorRGBA color;
 

@@ -6,43 +6,43 @@
  * @instance: An SDL instance of type struct SDL_Instance
  * Return: Boolean success flag (true or flase)
  */
-bool initialize_SDL(SDL_Instance *instance)
+bool initialize_SDL(SDL_Instance *ins)
 {
-	bool success = true;
+	bool s = true;
 	/* Initialize SDL */
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		fprintf(stderr, "Failed to initialize SDL! SDL_Error: %s\n",
 				SDL_GetError());
-		success = false;
+		s = false;
 	} else
 	{
-		instance->window = SDL_CreateWindow("The Maze Project",
+		ins->window = SDL_CreateWindow("The Maze Project",
 							SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 							SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (instance->window == NULL)
+		if (ins->window == NULL)
 		{
 			fprintf(stderr, "SDL failed to create Window! SDL_Error: %s\n",
 					SDL_GetError());
 			SDL_Quit();
-			success = false;
+			s = false;
 		} else
 		{
 			/*instance->screenSurface=SDL_GetWindowSurface(instance->window);*/
-			instance->renderer = SDL_CreateRenderer(instance->window, -1,
+			ins->renderer = SDL_CreateRenderer(ins->window, -1,
 						SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-			if (instance->renderer == NULL)
+			if (ins->renderer == NULL)
 			{
 				fprintf(stderr, "Failed to create Renderer! SDL_Error: %s\n",
 						SDL_GetError());
 				SDL_Quit();
-				success = false;
+				s = false;
 			}
 			/* Color the screen surface */
 			/* colorFill(instance, "black"); */
 		}
 	}
-	return (success);
+	return (s);
 }
 
 /**
@@ -50,17 +50,17 @@ bool initialize_SDL(SDL_Instance *instance)
  *
  * @quit: A boolean flag to keep the window open
  */
-void keep_window(bool *quit)
+void keep_open(bool *c)
 {
-	SDL_Event event;
+	SDL_Event e;
 
-	while (*quit == false)
+	while (*c == false)
 	{
-		while (SDL_PollEvent(&event))
+		while (SDL_PollEvent(&e))
 		{
-			if (event.type == SDL_QUIT)
+			if (e.type == SDL_QUIT)
 			{
-				*quit = true;
+				*c = true;
 				break;
 			}
 		}

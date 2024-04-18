@@ -5,10 +5,10 @@
  *
  * @instance: An SDL instance of type struct SDL_Instance
  */
-void draw_something(SDL_Instance *instance)
+void draw_walls(SDL_Instance *inst)
 {
-	SDL_SetRenderDrawColor(instance->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderDrawLine(instance->renderer, 10, 10, 100, 100);
+	SDL_SetRenderDrawColor(inst->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderDrawLine(inst->renderer, 10, 10, 100, 100);
 }
 
 /**
@@ -16,22 +16,22 @@ void draw_something(SDL_Instance *instance)
  *
  * @instance: An SDL instance of type struct SDL_Instance
  */
-void draw_image(SDL_Instance *instance)
+void draw_png(SDL_Instance *i)
 {
 	/* Apply the image */
-	SDL_BlitSurface(instance->image, NULL, instance->screenSurface, NULL);
+	SDL_BlitSurface(i->image, NULL, i->screenSurface, NULL);
 	/* Update the surface */
-	SDL_UpdateWindowSurface(instance->window);
+	SDL_UpdateWindowSurface(i->window);
 }
 
 /**
- * drawMiniMap - A function to draw the minimap.
+ * draw_MiniMap - A function to draw the minimap.
  *
  * @WorldMap: The map to draw
  * @instance: The SDL_Instance to draw to
  * @player: The player to draw
  */
-void drawMiniMap(int (*WorldMap)[MAP_WIDTH], SDL_Instance *instance,
+void draw_MiniMap(int (*World_Map)[MAP_WIDTH], SDL_Instance *instance,
 				Vector player)
 {
 	SDL_Rect curRect;
@@ -43,7 +43,7 @@ void drawMiniMap(int (*WorldMap)[MAP_WIDTH], SDL_Instance *instance,
 		{
 			SDL_Rect rect = {x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE};
 
-			color_walls(WorldMap, x, y, &color, 0);
+			color_walls(World_Map, x, y, &color, 0);
 			SDL_SetRenderDrawColor(instance->renderer, color.red, color.green,
 									color.blue, (Uint8) (255 * color.alpha));
 			SDL_RenderFillRect(instance->renderer, &rect);

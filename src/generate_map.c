@@ -5,7 +5,7 @@
  *
  * @worldMap: A 2-dimensional matrix of integers to render the game map
  */
-void generate_map(int (*worldMap)[MAP_WIDTH])
+void generate_map(int (*world_Map)[MAP_WIDTH])
 {
 	int WorldMap[MAP_WIDTH][MAP_HEIGHT] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -33,5 +33,5 @@ void generate_map(int (*worldMap)[MAP_WIDTH])
 	{1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1} };
-	memcpy(worldMap, WorldMap, sizeof(WorldMap));
+	memcpy(world_Map, WorldMap, sizeof(WorldMap));
 }

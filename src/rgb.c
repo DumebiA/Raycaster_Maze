@@ -1,12 +1,12 @@
 #include "../headers/main.h"
 
 /**
- * rgba_color_code - A code to return the RGBA code of the requested color
+ * color_code - A code to return the RGBA code of the requested color
  *
- * @color: An array of characters (string) specifying the requested color
+ * @c: An array of characters (string) specifying the requested color
  * Return: A struct of type ColorRGBA for the requested color
  */
-ColorRGBA rgba_color_code(char *color)
+ColorRGBA color_code(char *c)
 {
 	ColorRGBA RGB_Black = {0, 0, 0, 1.0};
 	ColorRGBA RGB_Red = {255, 0, 0, 1.0};
@@ -18,25 +18,25 @@ ColorRGBA rgba_color_code(char *color)
 	ColorRGBA RGB_Violet = {238, 130, 238, 1.0};
 	ColorRGBA RGB_White = {255, 255, 255, 1.0};
 
-	if (!strcmp(color, "red"))
+	if (!strcmp(c, "red"))
 		return (RGB_Red);
-	else if (!strcmp(color, "green"))
+	else if (!strcmp(c, "green"))
 		return (RGB_Green);
-	else if (!strcmp(color, "blue"))
+	else if (!strcmp(c, "blue"))
 		return (RGB_Blue);
-	else if (!strcmp(color, "yellow"))
+	else if (!strcmp(c, "yellow"))
 		return (RGB_Yellow);
-	else if (!strcmp(color, "orange"))
+	else if (!strcmp(c, "orange"))
 		return (RGB_Orange);
-	else if (!strcmp(color, "blue"))
+	else if (!strcmp(c, "blue"))
 		return (RGB_Blue);
-	else if (!strcmp(color, "indigo"))
+	else if (!strcmp(c, "indigo"))
 		return (RGB_Indigo);
-	else if (!strcmp(color, "violet"))
+	else if (!strcmp(c, "violet"))
 		return (RGB_Violet);
-	else if (!strcmp(color, "white"))
+	else if (!strcmp(c, "white"))
 		return (RGB_White);
-	else if (!strcmp(color, "black"))
+	else if (!strcmp(c, "black"))
 		return (RGB_Black);
 	else
 		return (RGB_Black);
@@ -51,31 +51,31 @@ ColorRGBA rgba_color_code(char *color)
  * @color: struct of type ColorRGBA containing the RGBA value of given color
  * @side: Side of the wall that was hit (NS or EW)
  */
-void color_walls(int (*worldMap)[MAP_WIDTH], int mapX, int mapY,
-				ColorRGBA *color, int side)
+void walls_paint(int (*worldmap)[MAP_WIDTH], int mX, int mY,
+				ColorRGBA *paint, int s)
 {
-	switch (worldMap[mapX][mapY])
+	switch (worldmap[mX][mY])
 	{
 		case 1:
-			*color = rgba_color_code("red");
+			*paint = color_code("red");
 			break;
 		case 2:
-			*color = rgba_color_code("green");
+			*paint = color_code("green");
 			break;
 		case 3:
-			*color = rgba_color_code("blue");
+			*paint = color_code("blue");
 			break;
 		case 4:
-			*color = rgba_color_code("white");
+			*paint = color_code("white");
 			break;
 		default:
-			*color = rgba_color_code("yellow");
+			*paint = color_code("yellow");
 			break;
 	}
 
 	/* give x and y sides different brightness */
-	if (side == 1)
-		rgba_div(color, 2, 1.0);
+	if (s == 1)
+		rgba_div(paint, 2, 1.0);
 }
 
 /**
