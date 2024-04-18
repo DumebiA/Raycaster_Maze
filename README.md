@@ -50,3 +50,4 @@ In conclusion, the 3D Raycasting Game project represents our passion for game de
 **Project Links:**
 - [Deployed Site](https://dumebia.github.io/Raycaster_Maze/)
 - [GitHub Repository](https://github.com/DumebiA/Raycaster_Maze/)
+- [Walkthrough and Features](https://www.youtube.com/watch?v=TtumA3C3MDg&list=PL49GLLXG1FKkq2zbj5thuEa8FdBXoQ2Ll)
