@@ -3,7 +3,7 @@
 ## Introduction
 Welcome to our 3D Raycasting Game project! Inspired by classic first-person shooter games, we embarked on this journey to create an immersive gaming experience using raycasting technology. Our goal was to push the boundaries of what we could achieve with C and SDL2, while also delving into the world of game development.
 
-![Uploading vlcsnap-2024-04-17-09h47m03s100.png…]()
+![Uploading vlcsnap-2024-04-17-09h47m03s100.png…](vlcsnap-2024-04-17-09h47m03s100)
 
 
 ## Inspiration
