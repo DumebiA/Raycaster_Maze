@@ -12,6 +12,11 @@ The inspiration for this project came from our shared love for retro gaming and 
 ## Technical Challenge
 One of the most daunting technical challenges we faced was implementing the raycasting algorithm itself. Understanding how to cast rays from the player's viewpoint, detect collisions with walls, and render the environment dynamically was a complex task. We spent countless hours studying tutorials, experimenting with different approaches, and debugging issues to refine our implementation.
 
+## Instalation
+Install SDL2 - to provide low level access to audio, keyboard, mouse, joystick and graphicshardware via OpenGL and Direct3D;
+Compile program - gcc -Wall -Werror -Wextra -pedantic ./src/*.c -lm -o 'Raycaster_Maze' `sdl2-config --cflags` `sdl2-config --libs`; 
+Run - ./Raycaster_Maze
+
 ### Raycasting Algorithm
 The raycasting algorithm works by casting rays from the player's viewpoint to determine the distance to walls in the environment. By calculating the intersection points between these rays and the walls, we can create the illusion of a 3D world. This process involves intricate mathematical calculations, including trigonometric functions and vector operations.
 
@@ -26,6 +31,9 @@ As we reflect on our journey, we envision several areas for improvement and expa
 
 ## Timeline and Collaboration
 This project was a labor of love spanning several weeks of intense development and collaboration. Despite the challenges, we supported each other, shared knowledge, and celebrated our victories along the way. Our teamwork and dedication were instrumental in bringing this project to life.
+
+## Related Projects
+Wolfenstein 3D
 
 ## Conclusion
 In conclusion, the 3D Raycasting Game project represents our passion for game development, our commitment to continuous learning, and our willingness to tackle complex technical challenges head-on. We are proud of what we have accomplished and excited to see where this journey takes us next.
